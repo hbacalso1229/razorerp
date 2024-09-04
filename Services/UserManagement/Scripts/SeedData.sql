@@ -1,0 +1,2 @@
+﻿INSERT INTO [dbo].[User] ([Id], [Email], [FirstName], [LastName], [Username], [Password], [CompanyId], [Role], [Created], [CreatedBy], [LastModified], [LastModifiedBy]) 
+VALUES (N'cf19ac7c-d2be-48d4-b642-675c6cdf4bff', N'helpdesk@gmail.com', N'Bill', N'Gates', N'Admin', N'AQAAAAIAAYagAAAAEDSBHgAAL7CUFTXQSSu+Uue8zKyQIwrswcxVzJ9XjWGU6NNK1nhq7mA1EuVUyt88xw==', N'53379b3c-2345-4a50-8153-5966e8ee6852', N'Admin', N'2024-09-03 22:55:25', N'api', N'2024-09-03 22:55:25', N'api')

@@ -1,0 +1,81 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "Debug"
+      },
+      {
+        "Name": "DiagnosticTrace"
+      },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "(@Level = 'Error' or @Level = 'Fatal' or @Level = 'Warning')"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "File",
+                "Args": {
+                  "path": "../Logs/Error/UserManagementAPI-.json",
+                  "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact",
+                  "outputTemplate": "[{Timestamp:dd-MM-yyyy HH:mm:ss.fff zzz} {Level,3:u}] {Message:lj}{NewLine}{Exception} {Properties:j}{NewLine}",
+                  "rollingInterval": "Day",
+                  "retainedFileCountLimit": 7
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "(@Level = 'Information' or @Level = 'Debug')"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "File",
+                "Args": {
+                  "path": "../Logs/Info/UserManagementAPI-.json",
+                  "formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact",
+                  "outputTemplate": "[{Timestamp:dd-MM-yyyy HH:mm:ss.fff zzz} {Level,3:u}] {Message:lj}{NewLine}{Exception} {Properties:j}{NewLine}",
+                  "rollingInterval": "Day",
+                  "retainedFileCountLimit": 7
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File", "Serilog.Filters.Expressions", "Serilog.Exceptions" ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithProcessName", "WithProcessId", "WithThreadName", "WithThreadId", "WithExceptionDetails" ],
+    "Properties": {
+      "Application": "RazorERP.UserManagement.Api"
+    }
+  }
+}
