@@ -1,13 +1,13 @@
-﻿using UserManagement.Application.Common.Models;
-using Swashbuckle.AspNetCore.Filters;
+﻿using Swashbuckle.AspNetCore.Filters;
+using UserManagement.Application.Commands.AuthenticateUser;
 
 namespace UserManagement.API.SwaggerExamples.Requests
 {
-    public class UserLoginRequestExample : IExamplesProvider<LoginUserRequest>
+    public class UserLoginRequestExample : IExamplesProvider<AuthorizeUserCommand>
     {
-        public LoginUserRequest GetExamples()
+        public AuthorizeUserCommand GetExamples()
         {
-            return new LoginUserRequest
+            return new AuthorizeUserCommand
             {
                 Username = "Admin",
                 Password = "@dmin."

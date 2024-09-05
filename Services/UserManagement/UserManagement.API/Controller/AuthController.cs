@@ -35,9 +35,9 @@ namespace UserManagement.API.Controller
         [HttpPost("authorize")]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(UserLoginResponse), StatusCodes.Status200OK, Type = typeof(UserLoginRequestExample))]
-        public async Task<ActionResult<UserLoginResponse>> AuthorizeUser([FromBody] LoginUserRequest request, CancellationToken cancellationToken)
+        public async Task<ActionResult<UserLoginResponse>> AuthorizeUser([FromBody] AuthorizeUserCommand command, CancellationToken cancellationToken)
         {
-            var token = await Mediator.Send(new AuthorizeUserCommand { Username = request.Username, Password = request.Password}, cancellationToken);
+            var token = await Mediator.Send(command, cancellationToken);
 
             return Ok(new UserLoginResponse { Token = token });
         }

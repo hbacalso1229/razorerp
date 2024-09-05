@@ -84,7 +84,7 @@ namespace UserManagement.API.Controller
         /// <param name="command">A user profile request</param>
         /// <param name="cancellationToken">A cancellation token</param>
         /// <returns>Newly created user</returns>
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("users")]
         [MapToApiVersion("1.0")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created, Type = typeof(CreateUserResponseExample))]
@@ -104,8 +104,8 @@ namespace UserManagement.API.Controller
         /// <returns>Updated existing user profile</returns>
         [Authorize(Roles = "Admin")]
         [HttpPut("users/{userId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> UpdateUser([FromRoute][Required()] Guid userId,
             [FromBody] UpdateUserCommand command, CancellationToken cancellationToken)
         {
